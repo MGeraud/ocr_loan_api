@@ -1,10 +1,10 @@
 package com.geraud.ocr_loan_api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -13,11 +13,18 @@ import java.time.LocalDate;
 public class Loan {
 
     @Id
-    private LoanId pk;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private int refreshEndingCounter;
     private LocalDate startingDate;
     private LocalDate bookBackDate;
+    private String label;
+    private String title;
+
+    @ManyToOne
+    @JsonIgnore
+    private User user;
 
 
 }

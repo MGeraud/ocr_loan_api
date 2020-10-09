@@ -14,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    private Long id;
 
     private String first_name;
     private String last_name;
@@ -25,7 +25,7 @@ public class User {
     private String zip_code;
     private String city;
 
-    @OneToMany(mappedBy = "pk.user")
+    @OneToMany(mappedBy = "user")
     private Set<Loan> loans =new HashSet<>();
 
 }

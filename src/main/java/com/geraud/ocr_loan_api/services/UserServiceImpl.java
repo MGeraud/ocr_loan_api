@@ -9,18 +9,17 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class UsesrServiceImpl implements UserService{
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserDao userDao;
 
     @Override
-    public User findByEmail(String email) throws NoUserFound {
-        Optional<User> optionalUser = userDao.findByEmail(email);
-
-        if (!optionalUser.isPresent()){
+    public User findByEmail(String email) {
+        Optional<User> user = userDao.findByEmail(email);
+        if (!user.isPresent()){
             throw new NoUserFound("Utilisateur non trouvé");
         }
-        return optionalUser.get();
+        return user.get();
     }
 }
