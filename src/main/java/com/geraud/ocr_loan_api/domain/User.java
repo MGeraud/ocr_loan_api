@@ -16,14 +16,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String first_name;
-    private String last_name;
     private String email;
-    private String phone;
-    private String address_line1;
-    private String address_line2;
-    private String zip_code;
-    private String city;
+    private String cardnumber;
 
     @OneToMany(mappedBy = "user")
     private Set<Loan> loans =new HashSet<>();

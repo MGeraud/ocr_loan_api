@@ -25,6 +25,4 @@ public class Loan {
     @ManyToOne
     @JsonIgnore
     private User user;
-
-
 }
