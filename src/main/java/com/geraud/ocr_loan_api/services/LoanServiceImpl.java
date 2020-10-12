@@ -1,8 +1,11 @@
 package com.geraud.ocr_loan_api.services;
 
 import com.geraud.ocr_loan_api.dao.LoanDao;
+import com.geraud.ocr_loan_api.dao.UserDao;
 import com.geraud.ocr_loan_api.domain.Loan;
+import com.geraud.ocr_loan_api.domain.User;
 import com.geraud.ocr_loan_api.exceptions.LoanNotFoundException;
+import com.geraud.ocr_loan_api.exceptions.NoUserFound;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,15 +13,17 @@ import java.util.Optional;
 @Service
 public class LoanServiceImpl implements LoanService{
     private final LoanDao loanDao;
+    private final UserDao userDao;
 
-    public LoanServiceImpl(LoanDao loanDao) {
+    public LoanServiceImpl(LoanDao loanDao, UserDao userDao) {
         this.loanDao = loanDao;
+        this.userDao = userDao;
     }
 
     @Override
     public Loan patchLoan(Long id, Loan loan) {
 
-        // recherche du prêt à aprtir de son id, si non trouvé renvoi erreur
+        // recherche du prêt à partir de son id, si non trouvé renvoi erreur
         Optional<Loan> foundLoan = loanDao.findById(id);
         if (!foundLoan.isPresent()){
             throw new LoanNotFoundException("Prêt non trouvé avec l'id : " + id);
@@ -39,5 +44,23 @@ public class LoanServiceImpl implements LoanService{
         loanDao.save(loanToModify);
 
         return loanToModify;
+    }
+
+    @Override
+    public Loan createLoan(String cardnumber, Loan loan) {
+
+        //vérification s'il existe un utilisateur ayant ce numero de carte, sinon envoi exception
+        Optional<User> optionalUser = userDao.findByCardnumber(cardnumber);
+
+        if (!optionalUser.isPresent()){
+            throw new NoUserFound("numéro de carte " + cardnumber + " : utilisateur inconnu");
+        }
+        User user = optionalUser.get();
+
+        //attribution du prêt à enregistrer à l'utilisateur
+        loan.setUser(user);
+        loanDao.save(loan);
+
+        return loan;
     }
 }
