@@ -15,8 +15,9 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/user")
-    public User getUser(@RequestParam(value = "email") String email) {
-        return userService.findByEmail(email);
+    public User getUser(@RequestParam(value = "email") String email ,
+                        @RequestParam(value = "cardnumber") String cardnumber) {
+        return userService.findByEmailAndCardNumber(email,cardnumber);
     }
 
    // @PatchMapping(value = "/user")

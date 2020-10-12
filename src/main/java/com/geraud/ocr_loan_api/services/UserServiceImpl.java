@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService{
     private UserDao userDao;
 
     @Override
-    public User findByEmail(String email) {
-        Optional<User> user = userDao.findByEmail(email);
+    public User findByEmailAndCardNumber(String email , String cardnumber) {
+        Optional<User> user = userDao.findByEmailAndCardnumber(email,cardnumber);
         if (!user.isPresent()){
             throw new NoUserFound("Utilisateur non trouvé");
         }

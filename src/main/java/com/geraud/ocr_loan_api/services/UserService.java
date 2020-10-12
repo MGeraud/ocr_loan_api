@@ -5,5 +5,5 @@ import com.geraud.ocr_loan_api.exceptions.NoUserFound;
 
 public interface UserService {
 
-    User findByEmail(String email);
+    User findByEmailAndCardNumber(String email, String cardnumber);
 }
