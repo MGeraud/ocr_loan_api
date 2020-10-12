@@ -27,10 +27,11 @@ public class LoanServiceImpl implements LoanService{
         Loan loanToModify = foundLoan.get();
 
         //vérification des 2 champs modifiable (date de retour et renouvellement période prêt) et attribution nouvelle valeur si nécessaire
-        // création date retour sera à implémenter avec microservice des employés pour déclarer le retour du prêt
-        //if (loan.getBookBackDate() != null){
-        //    loanToModify.setBookBackDate(loan.getBookBackDate());
-        //}
+        //création date retour sera à implémenter avec microservice des employés pour déclarer le retour du prêt
+        if (loan.getBookBackDate() != null){
+           loanToModify.setBookBackDate(loan.getBookBackDate());
+        }
+        //augmenter compteur de demande de prolongation de prêt (compteur plutot que booléen car si décide de permettre prolongation de prêt plusieurs fois par la suite
         if (loan.getRefreshEndingCounter() != 0) {
             loanToModify.setRefreshEndingCounter(loanToModify.getRefreshEndingCounter() + 1 );
         }

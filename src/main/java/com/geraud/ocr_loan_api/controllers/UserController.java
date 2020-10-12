@@ -19,10 +19,4 @@ public class UserController {
                         @RequestParam(value = "cardnumber") String cardnumber) {
         return userService.findByEmailAndCardNumber(email,cardnumber);
     }
-
-   // @PatchMapping(value = "/user")
-   // public User patchUser(@RequestParam(value = "email") String email , @RequestBody User user) {
-
-   // }
-
 }
