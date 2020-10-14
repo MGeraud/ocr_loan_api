@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class User {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class User {
     private String email;
     private String cardnumber;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "member")
     private Set<Loan> loans =new HashSet<>();
 
 }

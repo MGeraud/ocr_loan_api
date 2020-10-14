@@ -4,16 +4,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND , reason = "Utilisateur non trouvé")
-public class NoUserFound extends RuntimeException{
+public class NomemberFound extends RuntimeException{
 
-    public NoUserFound() {
+    public NomemberFound() {
     }
 
-    public NoUserFound(String message) {
+    public NomemberFound(String message) {
         super(message);
     }
 
-    public NoUserFound(String message, Throwable cause) {
+    public NomemberFound(String message, Throwable cause) {
         super(message, cause);
     }
 }
