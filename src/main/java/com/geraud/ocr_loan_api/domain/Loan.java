@@ -23,6 +23,5 @@ public class Loan {
     private String title;
 
     @ManyToOne
-    @JsonIgnore
     private Member member;
 }

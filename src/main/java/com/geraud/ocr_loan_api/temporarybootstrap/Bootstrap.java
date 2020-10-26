@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
-@Component
+//@Component
 public class Bootstrap implements CommandLineRunner {
 
     private MemberDao memberDao;

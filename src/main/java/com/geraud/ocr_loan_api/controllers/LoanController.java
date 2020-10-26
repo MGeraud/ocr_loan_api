@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class LoanController {
 
@@ -21,5 +23,12 @@ public class LoanController {
     @PostMapping("/loan/{cardnumber}")
     public ResponseEntity<Loan> createLoan(@PathVariable String cardnumber , @RequestBody Loan loan){
         return new ResponseEntity<Loan>(loanService.createLoan(cardnumber, loan) , HttpStatus.OK);
+    }
+
+    @GetMapping("/loan")
+    public List<Loan> loansOfMember(@RequestParam("email") String email,
+                                    @RequestParam("cardnumber") String cardnumber){
+        return loanService.listLoans(email, cardnumber);
+
     }
 }

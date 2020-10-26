@@ -1,5 +1,6 @@
 package com.geraud.ocr_loan_api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +21,7 @@ public class Member {
     private String cardnumber;
 
     @OneToMany(mappedBy = "member")
+    @JsonIgnore
     private Set<Loan> loans =new HashSet<>();
 
 }

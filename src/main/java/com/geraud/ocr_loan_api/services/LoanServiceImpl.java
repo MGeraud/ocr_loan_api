@@ -8,6 +8,7 @@ import com.geraud.ocr_loan_api.exceptions.LoanNotFoundException;
 import com.geraud.ocr_loan_api.exceptions.NomemberFound;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -62,5 +63,18 @@ public class LoanServiceImpl implements LoanService{
         loanDao.save(loan);
 
         return loan;
+    }
+
+    @Override
+    public List<Loan> listLoans(String email, String cardnumber) {
+        //vérification s'il existe un utilisateur ayant ce numero de carte et email, sinon envoi exception
+        Optional<Member> optionalMember = memberDao.findByEmailAndCardnumber(email, cardnumber);
+
+        if (!optionalMember.isPresent()){
+            throw new NomemberFound("Utilisateur inconnu avec email : " + email + " et numéro de carte : " + cardnumber);
+        }
+        Member member = optionalMember.get();
+
+        return loanDao.findByMemberID(member.getId());
     }
 }
