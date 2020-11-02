@@ -17,6 +17,7 @@ public class BatchController {
     @Autowired
     BatchService batchService;
 
+    /* Envoi de la liste des prêts échus en fonction d'une date et d'un nombre de prolongation */
     @GetMapping("/batch")
     public ResponseEntity<List<Loan>> batchDtoList(@RequestParam("date") String date,
                                                   @RequestParam("refresh") int refresh){
