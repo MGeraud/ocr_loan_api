@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface LoanDao extends JpaRepository<Loan , Long> {
@@ -14,4 +15,6 @@ public interface LoanDao extends JpaRepository<Loan , Long> {
 
     @Query("SELECT loans FROM Loan loans WHERE loans.member.id = :memberID")
     List<Loan> findByMemberID(Long memberID);
+
+    Optional<Loan> findByLabelEqualsAndBookBackDateIsNull(String label);
 }

@@ -77,4 +77,17 @@ public class LoanServiceImpl implements LoanService{
 
         return loanDao.findByMemberID(member.getId());
     }
+
+    /**
+     * Recherche si un exemplaire de livre est en cours d'emprunt
+     * @param label référence unique de l'exemplaire du livre
+     * @return true si disponible (pas d'emprunt en cours non retourné)
+     */
+    @Override
+    public boolean labelAvailable(String label) {
+        Optional<Loan> notAvailable = loanDao.findByLabelEqualsAndBookBackDateIsNull(label);
+        return notAvailable.isEmpty();
+    }
+
+
 }
